@@ -1,4 +1,6 @@
 exports.buildPlayerSummary = (data) => {
+  const battles = data.battleCount || (data.wins + data.losses);
+
   return {
     tag: data.tag,
     name: data.name,
@@ -7,8 +9,8 @@ exports.buildPlayerSummary = (data) => {
     bestTrophies: data.bestTrophies,
     wins: data.wins,
     losses: data.losses,
-    winRate: data.battleCount > 0 
-      ? ((data.wins / data.battleCount) * 100).toFixed(2)
+    winRate: battles > 0 
+      ? ((data.wins / battles) * 100).toFixed(2)
       : 0,
     clanName: data.clan?.name || "No Clan",
     clanTag: data.clan?.tag || null,

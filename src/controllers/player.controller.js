@@ -5,8 +5,8 @@ const {
   badRequest
 } = require("../utils/response");
 
-const clashService = require("../services/clashService");
-const summaryService = require("../services/summaryService");
+const clashService = require("../services/clash.service");
+const summaryService = require("../services/summary.service");
 
 exports.getPlayer = async (req, res) => {
   try {

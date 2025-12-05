@@ -1,11 +1,15 @@
 const clashApi = require("../config/axios");
 
+// 플레이어 정보 조회
 exports.getPlayer = async (tag) => {
-  const res = await clashApi.get(`/players/%23${tag}`);
+  const cleanTag = tag.replace("#", "");
+  const res = await clashApi.get(`/players/%23${cleanTag}`);
   return res.data;
 };
 
+// 배틀로그 조회
 exports.getBattleLog = async (tag) => {
-  const res = await clashApi.get(`/players/%23${tag}/battlelog`);
+  const cleanTag = tag.replace("#", "");
+  const res = await clashApi.get(`/players/%23${cleanTag}/battlelog`);
   return res.data;
 };

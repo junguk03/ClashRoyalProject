@@ -12,6 +12,6 @@ app.use(express.json());
 app.get("/api/v1/health", (req, res) => res.json({ status: "ok" }));
 
 app.use("/api/v1/players", playerRoutes);
-app.use("/api/v1/players", battleRoutes);
+app.use("/api/v1/battles", battleRoutes);
 
 module.exports = app;
