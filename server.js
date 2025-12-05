@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 
 const API_KEY = process.env.CLASH_API_KEY;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 const clashApi = axios.create({
   baseURL: "https://api.clashroyale.com/v1",
@@ -24,10 +24,10 @@ app.get("/api/v1/health", (req, res) => {
 });
 
 // 2) 플레이어 정보 조회
-app.get("/api/v1/players/:tag", async (req, res) => {
+app.get("/api/v1/player1/:tag", async (req, res) => {
   try {
     const tag = req.params.tag.replace("#", "");
-    const response = await clashApi.get(`/players/%23${tag}`);
+    const response = await clashApi.get(`/player1/%23${tag}`);
 
     res.json({
       success: true,
@@ -45,7 +45,7 @@ app.get("/api/v1/players/:tag", async (req, res) => {
 app.get("/api/v1/players/:tag/battlelog", async (req, res) => {
   try {
     const tag = req.params.tag.replace("#", "");
-    const response = await clashApi.get(`/players/%23${tag}/battlelog`);
+    const response = await clashApi.get(`/player1/%23${tag}/battlelog`);
 
     res.json({
       success: true,
