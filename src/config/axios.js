@@ -1,3 +1,5 @@
+console.log("SUPERCELL_API_KEY loaded:", !!process.env.SUPERCELL_API_KEY, process.env.SUPERCELL_API_KEY?.slice(0,6) + "..." + process.env.SUPERCELL_API_KEY?.slice(-6));
+
 const axios = require("axios");
 
 const clashApi = axios.create({
