@@ -1,0 +1,90 @@
+name: clash_royale_history
+description: Clash Royale History App
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  logger: ^2.4.0
+  flutter_svg: ^2.0.0
+  permission_handler: ^11.3.0
+  path_provider: ^2.1.1
+  flutter_dotenv: ^5.2.1
+  lottie: ^3.3.0
+  shorebird_code_push: ^2.0.5
+  flutter_native_splash: ^2.4.0
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+  http: ^1.2.0
+  http_parser: ^4.0.2
+  audioplayers: ^6.1.0
+  dotlottie_loader: ^0.0.5
+  package_info_plus: ^9.0.0
+  connectivity_plus: ^6.1.4
+  network_info_plus: ^6.1.3
+  shared_preferences: ^2.5.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  build_runner: ^2.4.6
+  freezed: ^2.4.5
+  json_serializable: ^6.7.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - shorebird.yaml
+    - .env
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: assets/fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: assets/fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: assets/fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: assets/fonts/Pretendard-Bold.otf
+          weight: 700
+
+# Flutter Native Splash Configuration
+flutter_native_splash:
+  # 배경색 - 흰색
+  color: "#FFFFFF"
+
+  # 중앙에 표시할 이미지 (앱 아이콘 사용)
+  image: ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+
+  # 앱 아이콘 사용 (기존 ic_launcher 사용)
+  android: true
+  ios: true
+  web: false
+
+  # 안드로이드 12+ 스플래시
+  android_12:
+    color: "#FFFFFF"
+    image: ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+
+  # iOS 다크모드 지원
+  color_dark: "#FFFFFF"
+  image_dark: ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+
+  # 스플래시 제거 시점: Flutter 첫 프레임 렌더링 후
+  # main.dart에서 수동으로 제어
+  android_gravity: center
+  ios_content_mode: center
+
+  # 풀스크린 스플래시
+  fullscreen: true

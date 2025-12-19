@@ -1,0 +1,149 @@
+# ---------------------------
+# Miscellaneous
+# ---------------------------
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# ---------------------------
+# IntelliJ related
+# ---------------------------
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# ---------------------------
+# VS Code
+# ---------------------------
+.vscode/
+
+# ---------------------------
+# Flutter/Dart/Pub related
+# ---------------------------
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+devtools_options.yaml
+
+# pubspec.lock은 앱에서는 반드시 포함해야 하므로 주석 처리하거나 제거
+# pubspec.lock
+
+# ---------------------------
+# Symbolication related
+# ---------------------------
+app.*.symbols
+
+# ---------------------------
+# Obfuscation related
+# ---------------------------
+app.*.map.json
+
+# ---------------------------
+# Android specific
+# ---------------------------
+/android/app/debug
+/android/app/profile
+/android/app/release
+android/.gradle/
+android/local.properties
+android/.cxx/
+android/app/*.keystore
+android/app/*.jks
+
+# ---------------------------
+# iOS/macOS specific
+# ---------------------------
+ios/Pods/
+macos/Pods/
+
+# Generated Xcode configs
+ios/Flutter/*.xcconfig
+macos/Flutter/*.xcconfig
+
+# Xcode workspace/user data
+*.xcworkspace
+*.xcuserstate
+*.xcuserdata/
+
+# ---------------------------
+# Windows/Linux/macOS Generated Plugin Files (강화됨)
+# ---------------------------
+# 모든 generated 파일 제외
+**/generated_*
+**/GeneratedPluginRegistrant.*
+
+# Windows 관련
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+windows/flutter/generated_plugins.cmake
+windows/flutter/*.cc
+windows/flutter/*.cmake
+
+# Linux 관련
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugin_registrant.h
+linux/flutter/generated_plugins.cmake
+linux/flutter/*.cc
+linux/flutter/*.cmake
+
+# macOS 관련
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/generated_*
+
+# iOS 관련
+ios/Runner/GeneratedPluginRegistrant.*
+ios/Flutter/generated_*
+ios/Flutter/flutter_export_environment.sh
+
+# ---------------------------
+# Flutter build artifacts (추가 보완)
+# ---------------------------
+# Windows/Linux/Mac C++ build files
+**/CMakeLists.txt.user
+**/cmake-build-*/
+
+# macOS build intermediates
+macos/Flutter/ephemeral/
+linux/flutter/ephemeral/
+windows/flutter/ephemeral/
+
+# iOS build intermediates
+ios/Flutter/ephemeral/
+
+# Web build artifacts
+web/.dart_tool/
+
+# ---------------------------
+# Firebase (Optional: if using)
+# ---------------------------
+ios/Runner/GoogleService-Info.plist
+android/app/google-services.json
+
+# Env
+/.env
+.env
+.env.*
+
+# Security Keys Configuration
+ios/Flutter/Keys.xcconfig
+
+# ---------------------------
+# Test related
+# ---------------------------
+# Patrol auto-generated test bundle
+integration_test/test_bundle.dart
