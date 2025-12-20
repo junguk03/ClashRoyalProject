@@ -1,6 +1,4 @@
 {
-  "buildCommand": "cd frontend && flutter build web --release",
-  "outputDirectory": "frontend/build/web",
   "rewrites": [
     {
       "source": "/api/v1/:path*",

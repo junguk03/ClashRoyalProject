@@ -37,7 +37,7 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
-/build/
+# /build/  # Vercel 배포를 위해 build/web 포함
 devtools_options.yaml
 
 # pubspec.lock은 앱에서는 반드시 포함해야 하므로 주석 처리하거나 제거
