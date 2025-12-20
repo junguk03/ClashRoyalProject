@@ -24,25 +24,25 @@ class ApiConfig {
 
   // Players
   static const String players = '/players';
-  static String playerByTag(String tag) => '/players/${encodeTag(tag)}';
-  static String playerUpcomingChests(String tag) => '/players/${encodeTag(tag)}/upcomingchests';
-  static String playerBattleLog(String tag) => '/players/${encodeTag(tag)}/battlelog';
+  static String playerByTag(String tag) => '/players/${tag.replaceAll('#', '')}';
+  static String playerUpcomingChests(String tag) => '/players/${tag.replaceAll('#', '')}/upcomingchests';
+  static String playerBattleLog(String tag) => '/players/${tag.replaceAll('#', '')}/battlelog';
 
   // Clans
   static const String clans = '/clans';
-  static String clanByTag(String tag) => '/clans/${encodeTag(tag)}';
-  static String clanMembers(String tag) => '/clans/${encodeTag(tag)}/members';
-  static String clanWarLog(String tag) => '/clans/${encodeTag(tag)}/warlog';
-  static String clanCurrentWar(String tag) => '/clans/${encodeTag(tag)}/currentwar';
-  static String clanCurrentRiverRace(String tag) => '/clans/${encodeTag(tag)}/currentriverrace';
-  static String clanRiverRaceLog(String tag) => '/clans/${encodeTag(tag)}/riverracelog';
+  static String clanByTag(String tag) => '/clans/${tag.replaceAll('#', '')}';
+  static String clanMembers(String tag) => '/clans/${tag.replaceAll('#', '')}/members';
+  static String clanWarLog(String tag) => '/clans/${tag.replaceAll('#', '')}/warlog';
+  static String clanCurrentWar(String tag) => '/clans/${tag.replaceAll('#', '')}/currentwar';
+  static String clanCurrentRiverRace(String tag) => '/clans/${tag.replaceAll('#', '')}/currentriverrace';
+  static String clanRiverRaceLog(String tag) => '/clans/${tag.replaceAll('#', '')}/riverracelog';
 
   // Cards
   static const String cards = '/cards';
 
   // Tournaments
   static const String tournaments = '/tournaments';
-  static String tournamentByTag(String tag) => '/tournaments/${encodeTag(tag)}';
+  static String tournamentByTag(String tag) => '/tournaments/${tag.replaceAll('#', '')}';
 
   // Challenges
   static const String challenges = '/challenges';
@@ -64,7 +64,7 @@ class ApiConfig {
   static String locationPathOfLegendSeasonRankings(int id, String seasonId) =>
       '/locations/$id/pathoflegend/$seasonId/rankings/players';
   static String locationGlobalTournamentRankings(String tag) =>
-      '/locations/global/rankings/tournaments/${encodeTag(tag)}';
+      '/locations/global/rankings/tournaments/${tag.replaceAll('#', '')}';
 
   // Global Seasons
   static const String globalSeasons = '/locations/global/seasons';
@@ -72,7 +72,7 @@ class ApiConfig {
   static String globalSeasonById(String id) => '/locations/global/seasons/$id';
   static String globalSeasonPlayerRankings(String id) => '/locations/global/seasons/$id/rankings/players';
   static String globalPathOfLegendRankings(String seasonId) => '/locations/global/pathoflegend/$seasonId/rankings/players';
-  static String globalTournamentRankings(String tag) => '/locations/global/rankings/tournaments/${encodeTag(tag)}';
+  static String globalTournamentRankings(String tag) => '/locations/global/rankings/tournaments/${tag.replaceAll('#', '')}';
 
   // Timeout 설정
   static const Duration connectionTimeout = Duration(seconds: 30);
