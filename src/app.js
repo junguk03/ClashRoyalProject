@@ -14,6 +14,4 @@ app.get("/api/v1/health", (req, res) => res.json({ status: "ok" }));
 app.use("/api/v1/players", playerRoutes);
 app.use("/api/v1/battles", battleRoutes);
 
-// Lambda에서는 정적 파일 서빙 불필요 (프론트엔드는 별도 호스팅)
-
 module.exports = app;
