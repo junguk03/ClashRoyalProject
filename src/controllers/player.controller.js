@@ -30,3 +30,37 @@ exports.getPlayer = async (req, res) => {
     return serverError(res, "플레이어 정보 조회 중 오류 발생");
   }
 };
+
+exports.getBattleLog = async (req, res) => {
+  try {
+    const { playerTag } = req.params;
+
+    if (!playerTag) return badRequest(res, "플레이어 태그가 필요합니다");
+
+    const data = await clashService.getBattleLog(playerTag);
+    if (!data) return notFound(res, "배틀 로그를 찾을 수 없습니다");
+
+    return success(res, data);
+
+  } catch (err) {
+    console.error(err);
+    return serverError(res, "배틀 로그 조회 중 오류 발생");
+  }
+};
+
+exports.getUpcomingChests = async (req, res) => {
+  try {
+    const { playerTag } = req.params;
+
+    if (!playerTag) return badRequest(res, "플레이어 태그가 필요합니다");
+
+    const data = await clashService.getUpcomingChests(playerTag);
+    if (!data) return notFound(res, "다가오는 상자 정보를 찾을 수 없습니다");
+
+    return success(res, data);
+
+  } catch (err) {
+    console.error(err);
+    return serverError(res, "다가오는 상자 조회 중 오류 발생");
+  }
+};

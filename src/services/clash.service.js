@@ -13,3 +13,10 @@ exports.getBattleLog = async (tag) => {
   const res = await clashApi.get(`/players/%23${cleanTag}/battlelog`);
   return res.data;
 };
+
+// 다가오는 상자 조회
+exports.getUpcomingChests = async (tag) => {
+  const cleanTag = tag.replace("#", "");
+  const res = await clashApi.get(`/players/%23${cleanTag}/upcomingchests`);
+  return res.data;
+};
