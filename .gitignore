@@ -51,3 +51,12 @@ Desktop.ini
 
 # PM2
 .pm2/
+
+# AWS
+*.csv
+.aws/
+.serverless/
+
+# Serverless Framework
+.serverless/
+serverless-state.json
