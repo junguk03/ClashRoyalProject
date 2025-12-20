@@ -1,11 +1,13 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiConfig {
   ApiConfig._();
 
-  // Clash Royale API Base URL
-  static const String baseUrl = 'https://api.clashroyale.com/v1';
+  // Backend API Base URL (from .env)
+  static String get baseUrl => dotenv.env['API_BASE_URL'] ?? 'http://localhost:3000/api/v1';
 
-  // API Key (Bearer Token)
-  // TODO: 실제 API 키로 교체 필요
+  // No API Key needed - backend handles it
+  // Frontend doesn't need to send API key anymore
   static String _apiKey = '';
 
   static String get apiKey => _apiKey;
@@ -14,7 +16,7 @@ class ApiConfig {
     _apiKey = key;
   }
 
-  static bool get hasApiKey => _apiKey.isNotEmpty;
+  static bool get hasApiKey => true; // Always true since backend handles authentication
 
   // =====================
   // Endpoints

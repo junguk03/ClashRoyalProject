@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:clash_royale_history/app/api/bindings/api_binding.dart';
-import 'package:clash_royale_history/app/api/config/api_config.dart';
 import 'package:clash_royale_history/app/routes/app_pages.dart';
 import 'package:clash_royale_history/app/routes/app_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -18,11 +17,7 @@ Future<void> main() async {
   // 환경변수 로드
   await dotenv.load(fileName: '.env');
 
-  // API 키 설정
-  final apiKey = dotenv.env['CR_API_KEY'] ?? '';
-  if (apiKey.isNotEmpty) {
-    ApiConfig.setApiKey(apiKey);
-  }
+  // Backend handles API key, no need to set it in frontend
 
   // 상태바 스타일 설정
   SystemChrome.setSystemUIOverlayStyle(
