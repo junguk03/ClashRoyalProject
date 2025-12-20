@@ -1,0 +1,26 @@
+service: clash-royale-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-northeast-2  # 서울 리전
+  stage: production
+  memorySize: 512
+  timeout: 30
+  environment:
+    SUPERCELL_API_KEY: ${env:SUPERCELL_API_KEY}
+    PORT: 3000
+
+functions:
+  api:
+    handler: lambda.handler
+    events:
+      - httpApi: '*'
+
+package:
+  exclude:
+    - node_modules/**
+    - .git/**
+    - frontend/**
+    - README.md
+    - .env
