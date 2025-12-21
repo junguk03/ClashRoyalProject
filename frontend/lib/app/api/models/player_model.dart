@@ -277,7 +277,7 @@ class PlayerBadge {
   final int? maxLevel;
   final int? progress;
   final int? target;
-  final String? iconUrls;
+  final dynamic iconUrls; // Can be Map or String
 
   PlayerBadge({
     required this.name,

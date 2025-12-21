@@ -144,16 +144,21 @@ class ApiClient extends GetxService {
           ? json.decode(response.body)
           : <String, dynamic>{};
 
+      // Extract 'data' field from backend response if it exists
+      final dataToProcess = jsonData is Map && jsonData.containsKey('data')
+          ? jsonData['data']
+          : jsonData;
+
       return ApiResponse<T>(
         success: true,
         statusCode: response.statusCode,
-        data: fromJson != null && jsonData != null
+        data: fromJson != null && dataToProcess != null
             ? fromJson(
-                jsonData is Map
-                    ? jsonData as Map<String, dynamic>
-                    : {'data': jsonData},
+                dataToProcess is Map
+                    ? dataToProcess as Map<String, dynamic>
+                    : {'data': dataToProcess},
               )
-            : jsonData,
+            : dataToProcess,
         message: 'Request successful',
       );
     } catch (e) {

@@ -1,334 +1,214 @@
-# Clash Royale API 프로젝트
+Clash Royale API Project
 
-Clash Royale 공식 API를 활용한 플레이어 정보 및 배틀 로그 조회 서비스
+클래시 로얄 플레이어 정보 및 전투 기록 조회 서비스
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 프로젝트 소개
 
-Supercell의 Clash Royale API를 활용하여 플레이어 정보와 배틀 기록을 조회하는 RESTful API 서버입니다.
-Express.js 기반으로 구축되었으며, 깔끔한 응답 구조와 요약 기능을 제공합니다.
+Supercell Clash Royale API를 활용한 플레이어 통계 조회 서비스입니다.
+Flutter 웹 프론트엔드와 Node.js Express 백엔드로 구성되어 있습니다.
 
-사용 기술
-- Node.js
-- Express.js 5.2.1
-- Axios 1.13.2
-- dotenv (환경변수 관리)
-- cors
+
+기술 스택
+
+Backend
+  Node.js 20.x
+  Express.js 5.2.1
+  Axios 1.13.2
+  dotenv
+
+Frontend
+  Flutter Web
+  Dart
+  GetX (상태 관리)
 
 
 주요 기능
 
-플레이어 정보 조회
-- 플레이어 태그로 상세 정보 조회
-- 요약 모드 지원 (승률, 트로피, 클랜 정보 등)
+  플레이어 정보 조회 (트로피, 레벨, 승률)
+  전투 기록 조회
+  다가오는 상자 정보
+  클랜 정보
 
-배틀 로그 조회
-- 최근 배틀 기록 확인
-- 요약 모드로 주요 정보만 추출 가능
 
-헬스 체크
-- 서버 상태 확인 엔드포인트
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 시작하기
 
-1단계: API 키 발급
 
-https://developer.clashroyale.com/ 접속 후
-계정 생성 → 로그인 → My Account → Create New Key 클릭
-API 키 생성 및 복사 (한 번만 표시됩니다)
+STEP 1  Supercell API 키 발급
 
-⚠️ API 키는 절대 GitHub이나 공개 저장소에 올리지 마세요
+https://developer.clashroyale.com 접속
+  계정 생성 및 로그인
+  My Account → Create New Key
+  IP Address: 본인의 공인 IP 입력 (curl https://api.ipify.org 로 확인)
+  API 키 복사 (재확인 불가하니 안전한 곳에 보관)
 
 
-2단계: 프로젝트 설치
+STEP 2  백엔드 설치 및 실행
 
-```bash
 git clone <repository-url>
 cd ClashRoyalProject
 npm install
-```
 
+루트 디렉토리에 .env 파일 생성:
 
-3단계: 환경변수 설정
-
-프로젝트 루트 폴더에 .env 파일을 생성하고 아래 내용을 입력하세요
-
-```env
-SUPERCELL_API_KEY=여기에_발급받은_API_키_입력
+SUPERCELL_API_KEY=your_api_key_here
 PORT=3000
-```
 
-💡 .env 파일은 .gitignore에 등록되어 있어 Git에 업로드되지 않습니다
+서버 실행:
 
-
-4단계: 서버 실행
-
-```bash
 node src/server.js
-```
-
-서버가 정상적으로 실행되면 다음 메시지가 표시됩니다:
-```
-Server Running on http://localhost:3000
-```
 
 
-API 사용법
+STEP 3  프론트엔드 설치 및 실행
 
-기본 URL: http://localhost:3000/api/v1
+cd frontend
+flutter pub get
+
+frontend 디렉토리에 .env 파일 생성:
+
+API_BASE_URL=http://localhost:3000/api/v1
+
+앱 실행:
+
+flutter run -d chrome
 
 
-헬스 체크
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-```http
+
+API 엔드포인트
+
+
+Health Check
 GET /api/v1/health
-```
 
-응답
-```json
-{
-  "status": "ok"
-}
-```
+응답: { "status": "ok" }
 
 
-플레이어 정보 조회
+Player Info
+GET /api/v1/players/:playerTag
 
-```http
-GET /api/v1/players/:playertag
-GET /api/v1/players/:playertag?summary=true
-```
+예시: GET /api/v1/players/9CQ2U8QJ
 
-파라미터
-- playertag: 플레이어 태그 (예: 2PP 또는 #2PP)
-
-쿼리 옵션
-- summary=true 입력 시 요약 정보만 표시
-
-예시
-```bash
-curl http://localhost:3000/api/v1/players/2PP
-curl http://localhost:3000/api/v1/players/2PP?summary=true
-```
-
-응답 (요약 모드)
-```json
+응답:
 {
   "success": true,
   "data": {
-    "tag": "#2PP",
+    "tag": "#9CQ2U8QJ",
     "name": "PlayerName",
-    "level": 13,
-    "trophies": 5200,
-    "bestTrophies": 5500,
-    "wins": 1500,
-    "losses": 800,
-    "winRate": "65.22",
-    "clanName": "클랜이름",
-    "clanTag": "#ABC123",
-    "arenaName": "Legendary Arena"
+    "trophies": 5000,
+    ...
   }
 }
-```
 
 
-배틀 로그 조회
+Battle Log
+GET /api/v1/players/:playerTag/battlelog
 
-```http
-GET /api/v1/battles/:tag
-GET /api/v1/battles/:tag?summary=true
-```
+최근 25개의 전투 기록 반환
 
-파라미터
-- tag: 플레이어 태그 (예: 2PP 또는 #2PP)
 
-쿼리 옵션
-- summary=true 입력 시 요약 정보만 표시
+Upcoming Chests
+GET /api/v1/players/:playerTag/upcomingchests
 
-예시
-```bash
-curl http://localhost:3000/api/v1/battles/2PP
-curl http://localhost:3000/api/v1/battles/2PP?summary=true
-```
+다가오는 상자 목록 반환
 
-응답 (요약 모드)
-```json
-[
-  {
-    "battleTime": "20231215T120000.000Z",
-    "gameMode": "PvP",
-    "arenaName": "Arena 15",
-    "result": "win",
-    "playerCrowns": 3,
-    "opponentCrowns": 1,
-    "trophyChange": 30,
-    "opponentName": "적플레이어",
-    "opponentClan": "적클랜",
-    "playerDeck": ["Giant", "Musketeer", "Mini P.E.K.K.A", "..."],
-    "opponentDeck": ["Hog Rider", "Valkyrie", "Arrows", "..."]
-  }
-]
-```
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+문제 해결
+
+
+포트 이미 사용 중
+
+lsof -i :3000
+kill -9 <PID>
+
+
+API 403 Forbidden 에러
+
+Supercell API 키의 IP 주소가 현재 IP와 일치하는지 확인
+개발자 포털에서 IP 재설정 필요
+
+
+Flutter 타입 에러
+
+ApiClient에서 백엔드 응답의 data 필드를 제대로 추출하는지 확인
+모델의 타입이 실제 API 응답과 일치하는지 확인
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+주요 수정 사항
+
+프로젝트 개발 중 해결한 주요 이슈들입니다.
+
+
+Issue 1  IP Whitelist
+
+문제: 0.0.0.0으로 설정해도 403 에러 발생
+해결: 실제 공인 IP를 API 키에 등록 (CIDR 표기법 0.0.0.0/0 시도 가능)
+
+
+Issue 2  API Response Parsing
+
+문제: Flutter에서 _JsonMap is not a subtype of String 에러
+해결:
+  ApiClient에서 data 필드 추출 로직 추가
+  PlayerBadge.iconUrls 타입을 String에서 dynamic으로 변경
+
+
+Issue 3  Express Route Order
+
+문제: /players/:playerTag/upcomingchests 호출 시 404 에러
+해결: 구체적인 라우트를 일반 라우트보다 먼저 정의
+
+올바른 순서:
+router.get("/:playerTag/battlelog", ...)
+router.get("/:playerTag/upcomingchests", ...)
+router.get("/:playerTag", ...)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 프로젝트 구조
 
-```text
 ClashRoyalProject/
-├── src/
-│   ├── config/
-│   │   └── axios.js              # Axios 인스턴스 설정
-│   ├── controllers/
-│   │   ├── player.controller.js  # 플레이어 요청 처리
-│   │   └── battle.controller.js  # 배틀 로그 요청 처리
-│   ├── routes/
-│   │   ├── player.routes.js      # 플레이어 라우트
-│   │   └── battle.routes.js      # 배틀 라우트
-│   ├── services/
-│   │   ├── clash.service.js      # Clash API 호출
-│   │   └── summary.service.js    # 데이터 요약 로직
-│   ├── utils/
-│   │   └── response.js           # 공통 응답 헬퍼
-│   ├── app.js                    # Express 앱 설정
-│   └── server.js                 # 서버 시작점
-├── .env                          # 환경변수 (Git 제외)
-├── .gitignore
-├── package.json
-└── README.md
-```
+  src/
+    config/        API 설정
+    controllers/   요청 처리
+    routes/        라우트 정의
+    services/      비즈니스 로직
+    utils/         유틸리티
+    app.js         Express 앱
+    server.js      서버 진입점
 
-계층별 설명
+  frontend/
+    lib/
+      app/
+        api/       API 클라이언트
+        feature/   화면별 기능
+        routes/    라우팅
+    build/web/     빌드 결과물
 
-Config (설정)
-Axios 인스턴스 생성 및 API 키 헤더 자동 추가
-
-Controllers (컨트롤러)
-HTTP 요청/응답 처리, 에러 핸들링, 쿼리 파라미터 파싱
-
-Services (서비스)
-외부 API 호출 로직, 비즈니스 로직 (요약 기능)
-
-Routes (라우트)
-URL 엔드포인트 정의, 컨트롤러 연결
-
-Utils (유틸리티)
-공통 응답 포맷 (success, error, notFound 등)
+  .env             환경변수 (gitignore)
+  package.json     의존성 관리
 
 
-개발 중 배운 점
-
-API 키 환경변수명 통일
-
-문제: .env에서는 CLASH_API_KEY로 설정했지만, 코드에서는 SUPERCELL_API_KEY를 사용
-해결: 일관성을 위해 코드를 SUPERCELL_API_KEY로 통일
-
-💡 환경변수명은 프로젝트 전체에서 일관되게 사용해야 디버깅이 쉽습니다
-
-
-RESTful 라우트 개선
-
-변경 전: /api/v1/battlelog/:tag
-변경 후: /api/v1/battles/:tag
-
-💡 REST API 설계 시 리소스명은 복수형을 사용하고, 일관된 네이밍 규칙을 따르는 것이 중요합니다
-
-
-응답 유틸리티 모듈화
-
-개선 전
-```javascript
-res.status(200).json({ success: true, data: result });
-```
-
-개선 후
-```javascript
-success(res, result);
-```
-
-💡 반복되는 코드를 유틸리티로 분리하면 코드가 깔끔해지고 유지보수가 쉬워집니다
-
-
-플레이어 태그 URL 인코딩 처리
-
-```javascript
-const cleanTag = tag.replace("#", "");
-const url = `/players/%23${cleanTag}`;
-```
-
-💡 URL에서 특수문자는 인코딩이 필요합니다. #은 %23으로 변환해야 합니다
-
-
-주의사항
-
-보안 관련
-
-⚠️ .env 파일을 절대 Git에 커밋하지 마세요
-⚠️ .env가 .gitignore에 포함되어 있는지 반드시 확인하세요
-⚠️ GitHub 등에 업로드할 때 환경변수가 포함되지 않았는지 재확인하세요
-
-
-API 사용 제한
-
-Clash Royale API는 요청 횟수 제한이 있습니다 (Rate Limit)
-과도한 요청 시 일시적으로 차단될 수 있습니다
-프로덕션 환경에서는 캐싱 전략을 고려하세요
-
-
-플레이어 태그 형식
-
-플레이어 태그는 #2PP 형식입니다
-URL에 입력할 때는 # 기호 포함 여부와 관계없이 작동합니다
-예: /api/v1/players/2PP 또는 /api/v1/players/%232PP 모두 가능
-
-
-에러 처리
-
-404 에러: 존재하지 않는 플레이어 태그
-401 에러: API 키가 잘못된 경우
-500 에러: 네트워크 오류
-
-
-트러블슈팅
-
-서버가 시작되지 않을 때
-
-.env 파일이 존재하는지 확인
-SUPERCELL_API_KEY가 올바르게 설정되었는지 확인
-포트 3000이 이미 사용 중인지 확인 (lsof -i :3000)
-
-
-API 호출 시 401 에러
-
-API 키가 만료되었거나 잘못되었을 가능성
-Clash Royale 개발자 포털에서 키를 재발급 받으세요
-
-
-API 호출 시 404 에러
-
-플레이어 태그가 정확한지 확인
-태그에 공백이나 잘못된 문자가 포함되지 않았는지 확인
-
-
-CORS 에러
-
-프론트엔드에서 호출 시 CORS 에러가 발생하면 cors 미들웨어가 제대로 설정되었는지 확인
-현재 모든 origin을 허용하도록 설정되어 있습니다
-
-
-향후 개선 계획
-
-- 데이터 캐싱 기능 추가 (Redis)
-- 클랜 정보 조회 API 추가
-- 카드 정보 조회 API 추가
-- API 문서 자동화 (Swagger)
-- 단위 테스트 작성
-- 로깅 시스템 추가 (Winston)
-- Rate Limiting 추가
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 참고 자료
 
-Clash Royale API 공식 문서: https://developer.clashroyale.com/api-docs/index.html
-Express.js 공식 문서: https://expressjs.com/
-Axios 문서: https://axios-http.com/
+Clash Royale API: https://developer.clashroyale.com/api-docs
+Express.js: https://expressjs.com
+Flutter: https://flutter.dev
